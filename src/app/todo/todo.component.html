@@ -1,0 +1,18 @@
+<h2>Todo</h2>
+<div class="container">
+  <div class="alert alert-warning" *ngIf="todoForm.dirty && targetDate.invalid">Enter valid target date</div>
+  <div class="alert alert-warning" *ngIf="todoForm.dirty && descriptionForm.invalid">Enter at least 5 characters as description</div>
+  <form (ngSubmit)="!todoForm.invalid && saveTodo()" #todoForm="ngForm">
+    <fieldset class="form-group">
+      <label>Description</label>
+      <input type="text" name="description" [(ngModel)]="todo.description" required="required" 
+        class="form-control" minlength="5" #descriptionForm="ngModel">
+    </fieldset>
+    <fieldset class="form-group">
+      <label>Target Date</label>
+      <input type="date" name="targetDate" [ngModel]="todo.targetDate | date:'yyyy-MM-dd'" #targetDate="ngModel"
+        (ngModelChange)="todo.targetDate = $event" required="required" class="form-control">
+    </fieldset>
+    <button class="btn btn-success" type="submit">Save</button>
+  </form>
+</div>
